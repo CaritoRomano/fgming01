@@ -39,8 +39,10 @@ class HomeController extends Controller
    		if ($id == 1) {
   			return view('homeController.diseno', ['seccionActiva' => $seccionActiva]);
 		}elseif ($id == 2) {
-        	return view('homeController.servicio', ['seccionActiva' => $seccionActiva]);
-    	}
+        	return view('homeController.analisisFEM', ['seccionActiva' => $seccionActiva]);
+    	}else{
+    		return redirect()->action('HomeController@servicios');
+       	}
     }
 
     public function empresa(){

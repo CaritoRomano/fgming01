@@ -25,7 +25,7 @@
           <img src="images/azul.jpg" alt="FEM" width="140" height="140">
           <h2>Análisis por método de elementos finitos</h2>
           <p>Encauzados en el grandioso camino de la ingeniería moderna, FGM Ingeniería provee el servicio de análisis por método de elementos finitos para el  estudio numerico de componentes, sistemas, estructuras, frecuencias naturales y modos de vibrar, análisis tensional...</p>
-          <p><a class="btn btn-default" href="#" role="button">Ver detalles &raquo;</a></p>
+          <p><a class="btn btn-default" href="{{ url('servicio/2') }}" role="button">Ver detalles &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
       </div><!-- /.row -->
 

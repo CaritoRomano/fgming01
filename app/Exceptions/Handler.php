@@ -44,6 +44,10 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        if ($exception->getStatusCode() == 404) {
+            return redirect()->action('HomeController@view');
+        }
+
         return parent::render($request, $exception);
     }
 
