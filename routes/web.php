@@ -45,6 +45,10 @@ Route::get('/empresa', ['uses' => 'HomeController@empresa',
 				'as'=> 'empresa'  /*se le asigna un nombre a la ruta*/
 ]);
 
+Route::resource('/contacto', 'MailController');
+/*
 Route::get('/contacto', ['uses' => 'HomeController@contacto',
-				'as'=> 'contacto'  /*se le asigna un nombre a la ruta*/
+				'as'=> 'contacto'  /*se le asigna un nombre a la ruta
 ]);
+
+Route::resource('/enviarContacto', 'MailController');*/

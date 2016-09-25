@@ -178,6 +178,10 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /*agregado para Form::*/
+        Collective\Html\HtmlServiceProvider::class,
+        /*fin*/
+
     ],
 
     /*
@@ -225,6 +229,11 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+
+        /*agregado para Form::*/
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
+        /*fin*/
     ],
 
 ];

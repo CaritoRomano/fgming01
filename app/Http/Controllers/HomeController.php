@@ -55,15 +55,5 @@ class HomeController extends Controller
     	return view('homeController.empresa', ['seccionActiva' => $seccionActiva]);
     }
 
-    public function contacto(){
-    	$seccionActiva = array(
-        	'index' => "",
-    		'servicios' => "",
-			'empresa' => "",
-			'contacto' => "active"
-		);
-    	return view('homeController.contacto', ['seccionActiva' => $seccionActiva]);
-    }
-
 
 }

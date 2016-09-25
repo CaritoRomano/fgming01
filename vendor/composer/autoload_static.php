@@ -16,6 +16,7 @@ class ComposerStaticInit3ab8e1260da9c1c147fa8eac34f37c15
         'e7223560d890eab89cda23685e711e2c' => __DIR__ . '/..' . '/psy/psysh/src/Psy/functions.php',
         'f0906e6318348a765ffb6eb24e0d0938' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Foundation/helpers.php',
         '58571171fd5812e6e447dce228f52f4d' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/helpers.php',
+        'f18cc91337d49233e5754e93f3ed9ec3' => __DIR__ . '/..' . '/laravelcollective/html/src/helpers.php',
     );
 
     public static $prefixLengthsPsr4 = array (
@@ -58,6 +59,7 @@ class ComposerStaticInit3ab8e1260da9c1c147fa8eac34f37c15
         'P' => 
         array (
             'Psy\\' => 4,
+            'Psr\\Log\\' => 8,
             'PhpParser\\' => 10,
         ),
         'M' => 
@@ -84,6 +86,7 @@ class ComposerStaticInit3ab8e1260da9c1c147fa8eac34f37c15
         ),
         'C' => 
         array (
+            'Collective\\Html\\' => 16,
             'ClassPreloader\\' => 15,
             'Carbon\\' => 7,
         ),
@@ -184,6 +187,10 @@ class ComposerStaticInit3ab8e1260da9c1c147fa8eac34f37c15
         array (
             0 => __DIR__ . '/..' . '/psy/psysh/src/Psy',
         ),
+        'Psr\\Log\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/psr/log/Psr/Log',
+        ),
         'PhpParser\\' => 
         array (
             0 => __DIR__ . '/..' . '/nikic/php-parser/lib/PhpParser',
@@ -216,6 +223,10 @@ class ComposerStaticInit3ab8e1260da9c1c147fa8eac34f37c15
         array (
             0 => __DIR__ . '/..' . '/myclabs/deep-copy/src/DeepCopy',
         ),
+        'Collective\\Html\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/laravelcollective/html/src',
+        ),
         'ClassPreloader\\' => 
         array (
             0 => __DIR__ . '/..' . '/classpreloader/classpreloader/src',
@@ -233,10 +244,6 @@ class ComposerStaticInit3ab8e1260da9c1c147fa8eac34f37c15
     public static $prefixesPsr0 = array (
         'P' => 
         array (
-            'Psr\\Log\\' => 
-            array (
-                0 => __DIR__ . '/..' . '/psr/log',
-            ),
             'Prophecy\\' => 
             array (
                 0 => __DIR__ . '/..' . '/phpspec/prophecy/src',
@@ -284,10 +291,13 @@ class ComposerStaticInit3ab8e1260da9c1c147fa8eac34f37c15
         'App\\Http\\Controllers\\Auth\\RegisterController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/RegisterController.php',
         'App\\Http\\Controllers\\Auth\\ResetPasswordController' => __DIR__ . '/../..' . '/app/Http/Controllers/Auth/ResetPasswordController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
+        'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
+        'App\\Http\\Controllers\\MailController' => __DIR__ . '/../..' . '/app/Http/Controllers/MailController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
         'App\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Mail\\ContactoEmail' => __DIR__ . '/../..' . '/app/Mail/ContactoEmail.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',
         'App\\Providers\\BroadcastServiceProvider' => __DIR__ . '/../..' . '/app/Providers/BroadcastServiceProvider.php',
@@ -311,6 +321,13 @@ class ComposerStaticInit3ab8e1260da9c1c147fa8eac34f37c15
         'ClassPreloader\\Parser\\FileVisitor' => __DIR__ . '/..' . '/classpreloader/classpreloader/src/Parser/FileVisitor.php',
         'ClassPreloader\\Parser\\NodeTraverser' => __DIR__ . '/..' . '/classpreloader/classpreloader/src/Parser/NodeTraverser.php',
         'ClassPreloader\\Parser\\StrictTypesVisitor' => __DIR__ . '/..' . '/classpreloader/classpreloader/src/Parser/StrictTypesVisitor.php',
+        'Collective\\Html\\Componentable' => __DIR__ . '/..' . '/laravelcollective/html/src/Componentable.php',
+        'Collective\\Html\\Eloquent\\FormAccessible' => __DIR__ . '/..' . '/laravelcollective/html/src/Eloquent/FormAccessible.php',
+        'Collective\\Html\\FormBuilder' => __DIR__ . '/..' . '/laravelcollective/html/src/FormBuilder.php',
+        'Collective\\Html\\FormFacade' => __DIR__ . '/..' . '/laravelcollective/html/src/FormFacade.php',
+        'Collective\\Html\\HtmlBuilder' => __DIR__ . '/..' . '/laravelcollective/html/src/HtmlBuilder.php',
+        'Collective\\Html\\HtmlFacade' => __DIR__ . '/..' . '/laravelcollective/html/src/HtmlFacade.php',
+        'Collective\\Html\\HtmlServiceProvider' => __DIR__ . '/..' . '/laravelcollective/html/src/HtmlServiceProvider.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
         'CreateUsersTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_000000_create_users_table.php',
         'Cron\\AbstractField' => __DIR__ . '/..' . '/mtdowling/cron-expression/src/Cron/AbstractField.php',
@@ -845,6 +862,7 @@ class ComposerStaticInit3ab8e1260da9c1c147fa8eac34f37c15
         'Illuminate\\Auth\\Events\\Lockout' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Events/Lockout.php',
         'Illuminate\\Auth\\Events\\Login' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Events/Login.php',
         'Illuminate\\Auth\\Events\\Logout' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Events/Logout.php',
+        'Illuminate\\Auth\\Events\\Registered' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Events/Registered.php',
         'Illuminate\\Auth\\GenericUser' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/GenericUser.php',
         'Illuminate\\Auth\\GuardHelpers' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/GuardHelpers.php',
         'Illuminate\\Auth\\Middleware\\Authenticate' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Auth/Middleware/Authenticate.php',
@@ -1301,6 +1319,7 @@ class ComposerStaticInit3ab8e1260da9c1c147fa8eac34f37c15
         'Illuminate\\Queue\\Jobs\\SyncJob' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Queue/Jobs/SyncJob.php',
         'Illuminate\\Queue\\Listener' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Queue/Listener.php',
         'Illuminate\\Queue\\LuaScripts' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Queue/LuaScripts.php',
+        'Illuminate\\Queue\\MaxAttemptsExceededException' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Queue/MaxAttemptsExceededException.php',
         'Illuminate\\Queue\\NullQueue' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Queue/NullQueue.php',
         'Illuminate\\Queue\\Queue' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Queue/Queue.php',
         'Illuminate\\Queue\\QueueManager' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Queue/QueueManager.php',
@@ -1401,6 +1420,12 @@ class ComposerStaticInit3ab8e1260da9c1c147fa8eac34f37c15
         'Illuminate\\Support\\Pluralizer' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/Pluralizer.php',
         'Illuminate\\Support\\ServiceProvider' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/ServiceProvider.php',
         'Illuminate\\Support\\Str' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/Str.php',
+        'Illuminate\\Support\\Testing\\Fakes\\BusFake' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/Testing/Fakes/BusFake.php',
+        'Illuminate\\Support\\Testing\\Fakes\\EventFake' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/Testing/Fakes/EventFake.php',
+        'Illuminate\\Support\\Testing\\Fakes\\MailFake' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/Testing/Fakes/MailFake.php',
+        'Illuminate\\Support\\Testing\\Fakes\\MailableFake' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/Testing/Fakes/MailableFake.php',
+        'Illuminate\\Support\\Testing\\Fakes\\NotificationFake' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/Testing/Fakes/NotificationFake.php',
+        'Illuminate\\Support\\Testing\\Fakes\\QueueFake' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/Testing/Fakes/QueueFake.php',
         'Illuminate\\Support\\Traits\\CapsuleManagerTrait' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/Traits/CapsuleManagerTrait.php',
         'Illuminate\\Support\\Traits\\Macroable' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/Traits/Macroable.php',
         'Illuminate\\Support\\ViewErrorBag' => __DIR__ . '/..' . '/laravel/framework/src/Illuminate/Support/ViewErrorBag.php',
