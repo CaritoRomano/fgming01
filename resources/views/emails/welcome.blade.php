@@ -1,0 +1,1 @@
+<p>Bienvenicosdf  {{ $nombreReceptor }}</p>
