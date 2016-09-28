@@ -8,6 +8,7 @@ use App\Http\Requests;
 
 use App\Mail\ContactoEmail;
 use Illuminate\Support\Facades\Mail;
+use Session;
 
 class MailController extends Controller
 {
@@ -19,25 +20,28 @@ class MailController extends Controller
 			'empresa' => "",
 			'contacto' => "active"
 		);
-    	return view('homeController.contacto', ['seccionActiva' => $seccionActiva]);
+    	return view('homeController.contacto', ['seccionActiva' => $seccionActiva, 'mensaje' => '']);
     }
 
     public function store(Request $request){
 
-    	//dd( $request->all());
-    	$mensaje = 
-    	Mail::to('romano.carolina90@gmail.com', 'nombremail')
-		->cc('cc@example.com') /*copias a otros destinatarios*/
-		/*->bcc('cc@example.com') copias ocultas a otros destinatarios*/
-		->send(new ContactoEmail('unNombreReceptor'));
+    	/*dd( $request->all()); */
 
+    	Mail::to('contacto@fgmingenieria.com.ar')
+		->cc('g-galarraga29@hotmail.com') /*copias a otros destinatarios*/
+		/*->bcc('cc@example.com') copias ocultas a otros destinatarios*/
+		->send(new ContactoEmail($request['nombre'], $request['email'], $request['mensaje']));
+
+
+        /*para redireccionar*/    
     	$seccionActiva = array(
         	'index' => "",
     		'servicios' => "",
 			'empresa' => "",
 			'contacto' => "active"
 		);
-    	return view('homeController.contacto', ['seccionActiva' => $seccionActiva]);
+
+    	return view('homeController.contacto', ['seccionActiva' => $seccionActiva, 'mensaje' => 'exito']);
     }
 
 }

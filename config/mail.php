@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => 'contacto@fgm.com',
-        'name' => 'Contacto',
+        'address' => 'contactofgmingenieria@gmail.com',
+        'name' => 'Contacto FGM',
     ],
 
     /*

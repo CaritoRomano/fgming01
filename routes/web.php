@@ -18,13 +18,6 @@ Route::get('/', function () {
 use App\Mail\ContactoEmail;
 use Illuminate\Support\Facades\Mail;
 
-Route::get('welcome', function() {
-	Mail::to('romano.carolina90@example.com', 'nombremail')
-		->cc('cc@example.com') /*copias a otros destinatarios*/
-		/*->bcc('cc@example.com') copias ocultas a otros destinatarios*/
-		->send(new ContactoEmail('unNombreReceptor'));
-});
-
 Route::get('/', ['uses' => 'HomeController@view',
 				'as'=> 'index' 
 ]);   /*se le asigna un nombre a la ruta*/

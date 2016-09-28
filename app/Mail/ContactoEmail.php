@@ -15,15 +15,19 @@ class ContactoEmail extends Mailable
      * @var
      */
         
-    public $nombreReceptor; /*SE PASA DIRECTO A LA VISTA*/
+    public $email;   /*SE PASA DIRECTO A LA VISTA*/
+    public $nombre;
+    public $mensaje;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($nombreReceptor)
+    public function __construct($nombre, $email, $mensaje)
     {
-        $this->nombreReceptor = $nombreReceptor;
+        $this->nombre = $nombre;
+        $this->email = $email;
+        $this->mensaje = $mensaje;
     }
 
     /**
@@ -33,7 +37,8 @@ class ContactoEmail extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.welcome')
-        ->subject('mensaje anank');
+        return $this->view('emails.emailContacto') 
+        ->subject('Mensaje de Contacto');
+        
     }
 }
