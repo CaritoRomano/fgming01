@@ -14,7 +14,7 @@
 
     @if ($mensaje == 'exito') 
 		<div class="alert alert-info">
-  			<a href="{{ url('servicios') }}" class="alert-link">El mensaje se ha enviado con exito! Gracias por contactarnos. &nbsp;&nbsp;&nbsp;Toque aqui para volver a la seccion de nuestros servicios...</a>
+  			<a href="{{ url('servicios') }}" class="alert-link">El mensaje se ha enviado con exito! Gracias por contactarnos.</a>
 		</div>
 
 	@else	
@@ -50,7 +50,7 @@
 			</div>
 
 			<div class="form-group">
-			    {!! Form::submit('Enviar!', ['class'=>'btn btn-primary']) !!}
+			    {!! Form::submit('Enviar', ['class'=>'btn btn-primary']) !!}
 			</div>
 
 	    {{ Form::close() }} 

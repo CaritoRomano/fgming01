@@ -2,7 +2,7 @@
 
 
 @section('head')
-  <title>Inicio</title>
+  <title>Servicios</title>
   <meta name="description" content="servicios">
   <meta name="keywords" content="FGMIngenieria, ingenieria, servicios">
 @endsection
@@ -18,13 +18,13 @@
         <div class="col-lg-4">
           <img src="{{ asset('/images/azul.jpg') }}" alt="Disenos por computadora" width="140" height="140">
           <h2>Disenos asistidos por computadora</h2>
-          <p>Esta área de FGM Ingeniería se dedica al diseño asistido por computadora. Nos destacamos por brindar soluciones a sistemas de gran complejidad, centrándonos en la innovación de soluciones para el diseño de diferentes componentes y estructuras metálicas... </p>
+          <p>FGM Ingeniería se dedica al diseño asistido por computadora. Nos destacamos por brindar soluciones a sistemas de gran complejidad, centrándonos en la innovación de soluciones para el diseño de diferentes componentes y estructuras metálicas... </p>
           <p><a class="btn btn-default" href="{{ url('servicio/1') }}" role="button">Ver detalles &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
         <div class="col-lg-4">
           <img src="{{ asset('/images/azul.jpg') }}" alt="FEM" width="140" height="140">
           <h2>Análisis por método de elementos finitos</h2>
-          <p>Encauzados en el grandioso camino de la ingeniería moderna, FGM Ingeniería provee el servicio de análisis por método de elementos finitos para el  estudio numerico de componentes, sistemas, estructuras, frecuencias naturales y modos de vibrar, análisis tensional...</p>
+          <p>FGM Ingeniería provee el servicio de análisis por método de elementos finitos para el  estudio numerico de componentes, sistemas, estructuras, frecuencias naturales y modos de vibrar, análisis tensional...</p>
           <p><a class="btn btn-default" href="{{ url('servicio/2') }}" role="button">Ver detalles &raquo;</a></p>
         </div><!-- /.col-lg-4 -->
       </div><!-- /.row -->
