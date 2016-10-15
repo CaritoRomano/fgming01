@@ -3,18 +3,18 @@
 
 @section('head')
 	<title>Contacto</title>
-	<meta name="description" content="Inicio">
-	<meta name="keywords" content="FGMIngenieria, ingenieria">
+	<meta name="description" content="Contacto">
+	<meta name="keywords" content="FGMIngenieria, ingenieria, contacto">
 @endsection
 
 @section('content')
     <div class="page-header">
-    	<h3>Envíenos sus dudas, su consulta no molesta...</h3>
+    	<h3>Env&iacute;enos sus dudas, su consulta no molesta...</h3>
     </div>
 
     @if ($mensaje == 'exito') 
 		<div class="alert alert-info">
-  			<a href="{{ url('servicios') }}" class="alert-link">El mensaje se ha enviado con exito! Gracias por contactarnos.</a>
+  			<a href="{{ url('servicios') }}" class="alert-link">El mensaje se ha enviado con &eacute;xito! Gracias por contactarnos.</a>
 		</div>
 
 	@else	
@@ -35,10 +35,10 @@
 
 			<div class="form-group">
 			    {!! Form::label('Email') !!}
-			    {!! Form::text('email', null, 
+			    {!! Form::email('email', null, 
 			        array('required', 
 			              'class'=>'form-control', 
-			              'placeholder'=>'Ingrese su email. Pronto recibira su respuesta.')) !!}
+			              'placeholder'=>'Ingrese su email. Pronto recibir&aacute; su respuesta.')) !!}
 			</div>
 
 			<div class="form-group">
@@ -46,7 +46,8 @@
 			    {!! Form::textarea('mensaje', null, 
 			        array('required', 
 			              'class'=>'form-control', 
-			              'placeholder'=>'Hola FGM Ingenieria...')) !!}
+			              'rows'=>'9',
+			              'placeholder'=>'Hola FGM Ingenier&iacute;a...')) !!}
 			</div>
 
 			<div class="form-group">

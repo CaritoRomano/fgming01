@@ -28,7 +28,7 @@ summary {
   display: block;
 }
 footer{
-  margin-top: 40px;
+  margin-top: 4%;
   background-color: #191918;
 }
 audio,
@@ -4369,7 +4369,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
   }
   .navbar-nav > li > a {
     padding-top: 15px;
-    padding-bottom: 15px;
+    padding-bottom: 17px;
   }
 }
 .navbar-form {
@@ -6779,3 +6779,18 @@ button.close {
   margin-right: 25%;
   margin-left: 20%;
 }
+
+.parrafoServicios {
+   font-size: 16px;
+}
+
+.imagenServicio {
+  margin: 0.15%;
+
+}
+
+#links {
+    text-align: center;
+}
+
+

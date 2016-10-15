@@ -15,8 +15,7 @@
 
   <!--  <link rel="stylesheet" type="text/css" href="{{ asset('plugins/bootstrap/css/bootstrap-theme.css') }}"> 
   -->
-    <script src="{{ asset( 'plugins/bootstrap/js/bootstrap.min.js') }}" type="text/javascript" charset="utf-8" async defer></script> 
-  <!--  <script src="{{ asset('plugins/bootstrap/js/npm.js') }}" type="text/javascript" charset="utf-8" async defer></script>-->
+
 
 
     
@@ -56,22 +55,32 @@
 
     <footer class="footer">
       <div class="container">
-        <p class="text-muted">Contacto: contacto@fgmingenieria.com</p>
-        <p class="text-muted">Telefono: 0221-xxxxx</p>
-        <p class="text-muted">Direccion: En el campo</p>
+        <p class="text-muted">Contacto:&nbsp;&nbsp;contacto@fgmingenieria.com.ar</p>
+        <p class="text-muted">Tel&eacute;fono:&nbsp;&nbsp;0221-155489828</p>
+        <p class="text-muted">La Plata&nbsp;&nbsp;-&nbsp;&nbsp;Buenos Aires&nbsp;&nbsp;-&nbsp;&nbsp;Argentina</p>
       </div>
     </footer>
 
-    <script>
+    <!--    <script >
     $(document).ready(function(){
         $('.myCarousel').carousel()
     });
-    </script>
+    </script>-->
+
 
     <!-- galeria de imagenes -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
     <script src="{{ asset( 'plugins/blueimp-gallery/js/bootstrap-image-gallery.min.js') }} "></script>
-    <!-- fin galeria de imagenes --> 
+    <!-- fin galeria de imagenes -->
+
+    <script src="{{ asset( 'plugins/bootstrap/js/bootstrap.min.js') }}" type="text/javascript" charset="utf-8" async defer></script> 
+    <script type="text/javascript">
+      var a = jQuery.noConflict();
+      a(document).ready(function(){
+        a('.myCarousel').carousel()
+      });
+    </script>
+ 
   </body>
 </html>
