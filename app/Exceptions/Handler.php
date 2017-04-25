@@ -44,9 +44,10 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
-        if ($exception->getStatusCode() == 404) {
-            return redirect()->action('HomeController@view');
-        }
+       /* dd($exception);
+        if ($exception->getStatusCode() == 404) {*/
+           // return redirect()->action('FrontendController@view');
+        //}
 
         return parent::render($request, $exception);
     }
@@ -64,6 +65,7 @@ class Handler extends ExceptionHandler
             return response()->json(['error' => 'Unauthenticated.'], 401);
         }
 
-        return redirect()->guest('login');
+        //return redirect()->guest('login');
+        return redirect()->guest('/index');
     }
 }
