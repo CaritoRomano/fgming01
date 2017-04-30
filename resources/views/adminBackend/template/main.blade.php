@@ -16,7 +16,13 @@
     <!-- galeria de imagenes -->
     <link rel="stylesheet" type="text/css"  href="{{ asset('plugins/blueimp-gallery/css/bootstrap-image-gallery.min.css') }}">
 
-    <link rel="stylesheet" type="text/css" href="{{ asset('plugins/blueimp-gallery/css/blueimp-gallery.min.css') }}">
+   <!-- <link rel="stylesheet" type="text/css" href="{{ asset('plugins/blueimp-gallery/css/blueimp-gallery.min.css') }}">
+     fin galeria de imagenes -->
+
+    <!-- galeria de imagenes blue imp-->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
+    <script src="{{ asset( 'plugins/blueimp-gallery/js/bootstrap-image-gallery.min.js') }} "></script>
     <!-- fin galeria de imagenes -->
 
   <!--  <link rel="stylesheet" type="text/css" href="{{ asset('plugins/bootstrap/css/bootstrap-theme.css') }}"> 
@@ -41,7 +47,7 @@
     @include('admin.template.analyticstracking')
     <div class="container"> 
       <!-- Fixed navbar -->
-      <nav class="navbar navbar-fixed-top">
+      <nav class="navbar navbar-default navbar-fixed-top navBack">
         <div class="container">
           <div class="navbar-header">  
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"> <!-- boton menu responsive -->
@@ -54,10 +60,10 @@
           </div>
           <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav navbar-right">
+              <li class="{{ $seccionActiva['inicio'] }}"><a href="{{ url('admin/inicio/1/edit') }}">Inicio</a></li>
               <li class="{{ $seccionActiva['empresa'] }}"><a href="{{ url('admin/empresa/1/edit') }}">Empresa</a></li>
               <li class="{{ $seccionActiva['servicios'] }}"><a href="{{ url('admin/servicios') }}">Servicios</a></li>
               <li class="{{ $seccionActiva['imagenes'] }}"><a href="{{ url('admin/imagenes') }}">Imagenes</a></li>
-              <li class="{{ $seccionActiva['contacto'] }}"><a href="{{ url('contacto') }}">Contacto</a></li>
 
               <!-- button usuario y salir -->
               <li class="dropdown">
@@ -97,13 +103,7 @@
     </script>-->
 
 
-    <!-- galeria de imagenes -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="//blueimp.github.io/Gallery/js/jquery.blueimp-gallery.min.js"></script>
-    <script src="{{ asset( 'plugins/blueimp-gallery/js/bootstrap-image-gallery.min.js') }} "></script>
-    <!-- fin galeria de imagenes -->
-
-    <script src="{{ asset( 'plugins/bootstrap/js/bootstrap.min.js') }}" type="text/javascript" charset="utf-8" async defer></script> 
+    <script src="{{ asset( 'plugins/bootstrap/js/bootstrap.min.js') }}" type="text/javascript" charset="utf-8" async defer></script>
     <script type="text/javascript">
       var a = jQuery.noConflict();
       a(document).ready(function(){

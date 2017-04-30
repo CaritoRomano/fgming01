@@ -20,13 +20,7 @@ class BackendController extends Controller
     }
 
     public function view(){
-        $seccionActiva = array(
-        	'empresa' => "active",
-    		'servicios' => "",
-			'imagenes' => "",
-			'contacto' => ""
-			);
-        return view('backend.backend', ['seccionActiva' => $seccionActiva]);
+        return redirect('admin/inicio/1/edit');
     }
 
 }

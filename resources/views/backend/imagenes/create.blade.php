@@ -26,7 +26,7 @@
 
 			<div class="form-group">
 			    {!! Form::label('Servicio') !!}
-			    {!! Form::select('id', $servicios,  
+			    {!! Form::select('idServicio', $servicios,  
 			        array('required', 
 			              'class'=>'form-control', 
 			              'value'=> app('request')->input('serv') )) !!}

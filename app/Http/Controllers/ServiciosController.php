@@ -28,10 +28,10 @@ class ServiciosController extends Controller
     public function index()
     {
         $seccionActiva = array(
+            'inicio' => "",
             'empresa' => "",
             'servicios' => "active",
-            'imagenes' => "",
-            'contacto' => ""
+            'imagenes' => ""
             );
         $servicios = Servicio::orderBy('id', 'DESC')->paginate(10);
 
@@ -46,10 +46,10 @@ class ServiciosController extends Controller
     public function create()
     {
         $seccionActiva = array(
+            'inicio' => "",
             'empresa' => "",
             'servicios' => "active",
-            'imagenes' => "",
-            'contacto' => ""
+            'imagenes' => ""
             );
         return view('backend.servicios.create', ['seccionActiva' => $seccionActiva]);
 
@@ -100,10 +100,10 @@ class ServiciosController extends Controller
     public function edit($id)
     {
         $seccionActiva = array(
+            'inicio' => "",
             'empresa' => "",
             'servicios' => "active",
-            'imagenes' => "",
-            'contacto' => ""
+            'imagenes' => ""
         );
         $servicio = Servicio::find($id);
         return view('backend.servicios.edit', ['seccionActiva' => $seccionActiva, 'servicio' => $servicio]);

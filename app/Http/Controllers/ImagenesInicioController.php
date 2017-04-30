@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests;
-use App\Empresa;
-use Validator;
 
-class EmpresaController extends Controller
+use App\Http\Requests;
+use App\Servicio;
+use App\ImagenInicio;
+use Validator;
+use File;
+
+class ImagenesInicioController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -48,7 +51,35 @@ class EmpresaController extends Controller
      */
     public function store(Request $request)
     {
-      //
+        $validator = Validator::make($request->all(), [
+            'imagen' => 'required|image',
+            'idServicio' => 'required'
+        ]);
+        if ($validator->fails()){
+            return redirect()
+                ->route('inicio.edit', ['id' => 1])
+                ->withErrors($validator)
+                ->withInput();
+        };
+
+        $file = $request->file('imagen');      
+        /*creo la imagen*/
+        $imagen = new ImagenInicio();
+        $imagen->idServicio = $request->idServicio;
+        $imagen->nombre = $file->getClientOriginalName();
+        $imagen->nombreArchivo = '';
+        $imagen->save();
+
+        $servicio = Servicio::find($request->idServicio);
+        $path = public_path() . '/images/carousel';
+        /*renombro la imagen*/
+        $nombreArchivo = $imagen->id . '_imagen_' . $servicio->nombre . '.' . $file->getClientOriginalExtension();
+        $file->move($path, $nombreArchivo);
+
+        $imagen->nombreArchivo = $nombreArchivo;
+        $imagen->save();
+  
+        return redirect()->route('inicio.edit', ['id' => 1]);  
     }
 
     /**
@@ -70,15 +101,7 @@ class EmpresaController extends Controller
      */
     public function edit($id)
     {
-        $seccionActiva = array(
-            'inicio' => "",
-            'empresa' => "active",
-            'servicios' => "",
-            'imagenes' => ""            
-            );
-
-        $empresa = Empresa::find($id);
-        return view('backend.empresa.edit', ['seccionActiva' => $seccionActiva, 'empresa' => $empresa]);
+        //
     }
 
     /**
@@ -90,23 +113,7 @@ class EmpresaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $validator = Validator::make($request->all(), [
-            'nombre' => 'required|min:1|max:50',
-            'mail' => 'max:50|email'
-        ]);
-        if ($validator->fails()){
-          return redirect()
-                ->route('empresa.edit', ['id' => $id])
-                ->withErrors($validator)
-                ->withInput();
-        };
-
-        $empresa = Empresa::find($id);
-        $empresa->fill($request->all());
-        $empresa->save();
-
-        return redirect()->route('empresa.index');  //modificar
-
+        //
     }
 
     /**
@@ -117,6 +124,9 @@ class EmpresaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $imagen = ImagenInicio::find($id);
+        File::delete(public_path() .'/images/carousel/' . $imagen->nombreArchivo);   
+        $imagen->delete();
+        return redirect()->route('inicio.edit', ['id' => 1]); 
     }
 }

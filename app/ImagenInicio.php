@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ImagenesInicio extends Model
+class ImagenInicio extends Model
 {
-    protected $table = "Imagenes";
+    protected $table = "ImagenesInicio";
 
   	protected $filllable = ['nombre', 'IdServicio', 'nombreArchivo'];
   	protected $guarded = ['id'];

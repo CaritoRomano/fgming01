@@ -54,14 +54,17 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
 				'as'=> 'backend'
 	]);	
 	
-	Route::resource('/empresa', 'EmpresaController');
+	Route::resource('/empresa', 'EmpresaController', ['only' => [
+    	'index', 'show'
+	]]);
 
 	Route::resource('/servicios', 'ServiciosController');
 
-	Route::get('/imagenes/create',['uses' => 'ImagenesController@create',
-				'as'=> 'createimagen'  
-	]);
 	Route::resource('/imagenes', 'ImagenesController');
+
+	Route::resource('/inicio', 'InicioController');
+
+	Route::resource('/imagenesInicio', 'ImagenesInicioController');
 });
 
 
@@ -80,6 +83,4 @@ Route::get('/admin', ['uses' => 'BackendController@view',
 ]);
 
 */
-Auth::routes();
-
-Route::get('/home', 'HomeController@index'); 
+Auth::routes(); //Route::get('/home', 'HomeController@index'); 

@@ -6798,6 +6798,7 @@ button.close {
 .imagenConBoton {
   position: relative;
   float: left;
+  margin-bottom: 1.7%;
 }
 
 .botonParaImagen {
@@ -6852,3 +6853,20 @@ button.close {
   color:white;
 }
 /*fin boton subir imagen*/
+
+.navBack{
+  background-color: #1b313b /*#26452a #5f9e87*/;
+}
+
+.tipografiaTextoInicio{
+  font-size: 18px;
+  line-height: 1.1;
+}
+
+.marginTop20{
+  margin-top: 20%;
+}
+
+.marginLeft{
+  margin-left: 90%;
+}

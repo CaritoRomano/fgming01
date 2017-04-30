@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+
 use App\Http\Requests;
-use App\Empresa;
+use App\Descripcion;
+use App\ImagenInicio;
+use App\Servicio;
 use Validator;
 
-class EmpresaController extends Controller
+class InicioController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -48,7 +51,7 @@ class EmpresaController extends Controller
      */
     public function store(Request $request)
     {
-      //
+        //
     }
 
     /**
@@ -71,14 +74,16 @@ class EmpresaController extends Controller
     public function edit($id)
     {
         $seccionActiva = array(
-            'inicio' => "",
-            'empresa' => "active",
+            'inicio' => "active",
+            'empresa' => "",
             'servicios' => "",
             'imagenes' => ""            
             );
-
-        $empresa = Empresa::find($id);
-        return view('backend.empresa.edit', ['seccionActiva' => $seccionActiva, 'empresa' => $empresa]);
+        $descripcion = Descripcion::find(1);
+        $cantImagenes = ImagenInicio::count();
+        $imagenes = ImagenInicio::orderBy('id', 'DESC')->paginate(10);
+        $servicios = Servicio::orderBy('nombre', 'ASC')->pluck('nombre', 'id');
+        return view('backend.inicio.edit', ['seccionActiva' => $seccionActiva, 'descripcion' => $descripcion, 'cantImagenes'=> $cantImagenes, 'imagenes' => $imagenes, 'servicios' => $servicios]);
     }
 
     /**
@@ -91,22 +96,20 @@ class EmpresaController extends Controller
     public function update(Request $request, $id)
     {
         $validator = Validator::make($request->all(), [
-            'nombre' => 'required|min:1|max:50',
-            'mail' => 'max:50|email'
+            'textoInicio' => 'required|min:10'
         ]);
         if ($validator->fails()){
           return redirect()
-                ->route('empresa.edit', ['id' => $id])
+                ->route('inicio.edit', ['id' => $id])
                 ->withErrors($validator)
                 ->withInput();
         };
 
-        $empresa = Empresa::find($id);
-        $empresa->fill($request->all());
-        $empresa->save();
+        $descripcion = Descripcion::find($id);
+        $descripcion->textoInicio = $request->textoInicio;
+        $descripcion->save();
 
-        return redirect()->route('empresa.index');  //modificar
-
+        return redirect()->route('inicio.edit', ['id' => $id]);  
     }
 
     /**

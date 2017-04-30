@@ -30,10 +30,10 @@ class ImagenesController extends Controller
     public function index()
     {
         $seccionActiva = array(
+            'inicio' => "",
             'empresa' => "",
             'servicios' => "",
-            'imagenes' => "active",
-            'contacto' => ""
+            'imagenes' => "active"            
             );
         $imagenes = Imagen::orderBy('idServicio', 'ASC')->get();
         $servicios = Servicio::orderBy('id', 'ASC')->paginate(10);
@@ -48,10 +48,10 @@ class ImagenesController extends Controller
     public function create()
     {
         $seccionActiva = array(
+            'inicio' => "",
             'empresa' => "",
             'servicios' => "",
-            'imagenes' => "active",
-            'contacto' => ""
+            'imagenes' => "active"
             );
         $servicios = Servicio::orderBy('nombre', 'ASC')->pluck('nombre', 'id');
         return view('backend.imagenes.create', ['seccionActiva' => $seccionActiva, 'servicios' => $servicios]);
@@ -67,7 +67,8 @@ class ImagenesController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'imagen' => 'required|image',
-            'thumbnails' => 'required|image'
+            'thumbnails' => 'required|image',
+            'idServicio' => 'required'
         ]);
         if ($validator->fails()){
             return redirect()
@@ -80,14 +81,14 @@ class ImagenesController extends Controller
         $fileThumbnails = $request->file('thumbnails');        
         /*creo la imagen y el thumbnails*/
         $imagen = new Imagen();
-        $imagen->idServicio = $request->id;
+        $imagen->idServicio = $request->idServicio;
         $imagen->nombre = $file->getClientOriginalName();
         $imagen->nombreArchivo = '';
         $imagen->nombreThumbnails = $fileThumbnails->getClientOriginalName();
         $imagen->nombreArchivoThumbnails = '';
         $imagen->save();
 
-        $servicio = Servicio::find($request->id);
+        $servicio = Servicio::find($request->idServicio);
         $path = public_path() . '/images/' . $servicio->nombre;
         $pathThumbnails = public_path() . '/images/thumbnails/' . $servicio->nombre;
         /*renombro la imagen y el thumbnails*/
@@ -123,10 +124,10 @@ class ImagenesController extends Controller
     public function edit($id)
     {
         $seccionActiva = array(
+            'inicio' => "",
             'empresa' => "",
             'servicios' => "active",
-            'imagenes' => "",
-            'contacto' => ""
+            'imagenes' => ""
         );
         $imagen = Imagen::find($id);
         $servicioImagen = $imagen->servicio;
@@ -154,6 +155,6 @@ class ImagenesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        dd($id);
     }
 }

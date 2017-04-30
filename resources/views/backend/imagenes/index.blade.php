@@ -27,7 +27,7 @@
 						<div class="botonParaImagen"> 
     						<a href="{{ route('imagenes.destroy', $imagen->id) }}" onclick="return confirm('Confirma que desea eliminar la imagen {{ $imagen->nombre }}?')" class="btn btn-danger"><span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span></a>
 						</div>
-    				</div>
+    			</div>
     			@endif
     		@endforeach
     		</div>
