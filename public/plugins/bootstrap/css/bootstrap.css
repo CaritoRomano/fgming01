@@ -4554,8 +4554,8 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-default .navbar-nav > .open > a,
 .navbar-default .navbar-nav > .open > a:hover,
 .navbar-default .navbar-nav > .open > a:focus {
-  color: #555;
-  background-color: #e7e7e7;
+  color: #B8E2E0;
+  background-color: #015049;
 }
 @media (max-width: 767px) {
   .navbar-default .navbar-nav .open .dropdown-menu > li > a {
@@ -6777,11 +6777,6 @@ button.close {
   margin-top: 100px;
 }
 
-.divFormContacto{
-  margin-right: 25%;
-  margin-left: 20%;
-}
-
 .parrafoServicios {
    font-size: 16px;
 }
@@ -6855,7 +6850,7 @@ button.close {
 /*fin boton subir imagen*/
 
 .navBack{
-  background-color: #1b313b /*#26452a #5f9e87*/;
+  background-color: #1b313b;   /*#26452a #5f9e87*/;
 }
 
 .tipografiaTextoInicio{
@@ -6863,10 +6858,32 @@ button.close {
   line-height: 1.1;
 }
 
-.marginTop20{
-  margin-top: 20%;
+@media (min-width: 1200px) {
+  .marginTop20{
+    margin-top: 20.5%;
+  }
 }
 
 .marginLeft{
   margin-left: 90%;
+}
+
+.MBServicio{
+  width: 87px;
+  height: 30px;
+}
+
+.imagenFondoLogin{
+  background-image: url("/images/login/blancoynegro.jpg");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: #ddd;
+}
+
+.containerLogin{
+  margin-top: 2%;
+  background-color: #ddd;
+  opacity: 0.9;
 }

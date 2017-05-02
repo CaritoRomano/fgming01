@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Servicio;
+use App\Empresa;
+use Validator;
+use File;
 
 class ServiciosController extends Controller
 {
@@ -30,12 +33,11 @@ class ServiciosController extends Controller
         $seccionActiva = array(
             'inicio' => "",
             'empresa' => "",
-            'servicios' => "active",
-            'imagenes' => ""
+            'servicios' => "active"
             );
         $servicios = Servicio::orderBy('id', 'DESC')->paginate(10);
-
-        return view('backend.servicios.index', ['seccionActiva' => $seccionActiva, 'servicios' => $servicios]);
+        $datosEmpresa = Empresa::find(1);
+        return view('backend.servicios.index', ['seccionActiva' => $seccionActiva, 'servicios' => $servicios, 'datosEmpresa' => $datosEmpresa]);
     }
 
     /**
@@ -45,14 +47,7 @@ class ServiciosController extends Controller
      */
     public function create()
     {
-        $seccionActiva = array(
-            'inicio' => "",
-            'empresa' => "",
-            'servicios' => "active",
-            'imagenes' => ""
-            );
-        return view('backend.servicios.create', ['seccionActiva' => $seccionActiva]);
-
+      //
     }
 
     /**
@@ -63,20 +58,38 @@ class ServiciosController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->file('imagen'))
-        {
-            $file = $request->file('imagen');
-            $nombreArchivo = 'imagenVista_' . $request->nombre . '.' . $file->getClientOriginalExtension();
+        $validator = Validator::make($request->all(), [
+            'imagen' => 'required|image',
+            'nombre' => 'required',
+            'descripcionCorta' => 'required|max:250'
+        ]);
+        
+        if ($validator->fails()){
+            return redirect()
+                ->route('servicios.index')
+                ->withErrors($validator)
+                ->withInput();
+        };
+        
+        $file = $request->file('imagen');
             
-            $path = public_path() . '/images/servicios';
-            $file->move($path, $nombreArchivo);
-            $servicio = new Servicio();
-            $servicio->nombre = $request->nombre;
-            $servicio->descripcion = $request->descripcion;
-            $servicio->descripcionCorta = $request->descripcionCorta;
-            $servicio->nombreImagen = $nombreArchivo;
-            $servicio->save();
-        }
+        $servicio = new Servicio();
+        $servicio->nombre = $request->nombre;
+        $servicio->nombreImagen = $file->getClientOriginalName();
+        $servicio->nombreArchivo = '';
+        $servicio->descripcion = $request->descripcion;
+        $servicio->descripcionCorta = $request->descripcionCorta;
+        ($request->conDetalle == 1) ? $request->conDetalle = 1 : $request->conDetalle = 0;
+        $servicio->conDetalle = $request->conDetalle;
+        $servicio->save();
+
+        $path = public_path() . '/images/servicios';
+        $nombreArchivo = $servicio->id .'imagenVista_' . $request->nombre . '.' . $file->getClientOriginalExtension();
+        $file->move($path, $nombreArchivo);
+
+        $servicio->nombreArchivo = $nombreArchivo;
+        $servicio->save();
+
         return redirect()->route('servicios.index');  //modificar
     }
 
@@ -106,7 +119,8 @@ class ServiciosController extends Controller
             'imagenes' => ""
         );
         $servicio = Servicio::find($id);
-        return view('backend.servicios.edit', ['seccionActiva' => $seccionActiva, 'servicio' => $servicio]);
+        $datosEmpresa = Empresa::find(1);
+        return view('backend.servicios.edit', ['seccionActiva' => $seccionActiva, 'servicio' => $servicio, 'datosEmpresa' => $datosEmpresa]);
     }
 
     /**
@@ -117,11 +131,37 @@ class ServiciosController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
-        //VALIDAR DATOS
-
+    {  
+        $validator = Validator::make($request->all(), [
+            'imagen' => 'required|image',
+            'nombre' => 'required',
+            'descripcionCorta' => 'required|max:250'
+        ]);
+        
+        if ($validator->fails()){
+            return redirect()
+                ->route('servicios.edit', ['id' => $id])
+                ->withErrors($validator)
+                ->withInput();
+        };
+        
+        $file = $request->file('imagen');
+            
         $servicio = Servicio::find($id);
-        $servicio->fill($request->all());
+        $servicio->nombre = $request->nombre;
+        $servicio->nombreImagen = $file->getClientOriginalName();
+        $servicio->nombreArchivo = '';
+        $servicio->descripcion = $request->descripcion;
+        $servicio->descripcionCorta = $request->descripcionCorta;
+        ($request->conDetalle == 1) ? $request->conDetalle = 1 : $request->conDetalle = 0;
+        $servicio->conDetalle = $request->conDetalle;
+        $servicio->save();
+
+        $path = public_path() . '/images/servicios';
+        $nombreArchivo = $servicio->id .'imagenVista_' . $request->nombre . '.' . $file->getClientOriginalExtension();
+        $file->move($path, $nombreArchivo);
+
+        $servicio->nombreArchivo = $nombreArchivo;
         $servicio->save();
 
         return redirect()->route('servicios.index');  //modificar
@@ -135,6 +175,10 @@ class ServiciosController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $servicio = Servicio::find($id);
+        File::delete(public_path() .'/images/servicios/' . $servicio->nombreArchivo); 
+        /*File::delete(public_path() .'/images/servicios/' . $servicio->nombreArchivo); ELIMINAR TODAS LAS DEL SERVICIO*/
+        $servicio->delete();
+        return redirect()->route('servicios.index');
     }
 }

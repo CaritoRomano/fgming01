@@ -55,17 +55,39 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function(){
 	]);	
 	
 	Route::resource('/empresa', 'EmpresaController', ['only' => [
-    	'index', 'show'
+    	'edit', 'update'
 	]]);
 
-	Route::resource('/servicios', 'ServiciosController');
+	Route::resource('/servicios', 'ServiciosController', ['only' => ['index', 'store', 'edit', 'update', 'destroy'
+	]]);
 
-	Route::resource('/imagenes', 'ImagenesController');
+	Route::resource('/imagenes', 'ImagenesController', ['only' => ['store', 'show',
+    	'edit', 'update', 'destroy'
+	]]);
 
-	Route::resource('/inicio', 'InicioController');
+	Route::resource('/inicio', 'InicioController', ['only' => ['edit', 'update'
+	]]);
 
-	Route::resource('/imagenesInicio', 'ImagenesInicioController');
+	Route::resource('/imagenesInicio', 'ImagenesInicioController', ['only' => [
+    	'store', 'destroy'
+	]]);
+
+	// Password Reset Routes...
+    Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm');
+    Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+	Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm');
+	Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail');
+    Route::post('logout', 'Auth\LoginController@logout');
 });
+
+///////////////////////////////////////////////////////////////////////////
+/////////////////////     AUNTENTICACION       ////////////////////////////
+///////////////////////////////////////////////////////////////////////////
+Route::get('/administrar/FGMIngenieria', ['uses' => 'Auth\LoginController@showLoginForm', 'as' => 'login'
+]);
+
+Route::post('/administrar/FGMIngenieria', 'Auth\LoginController@login');
+
 
 
 /*
@@ -83,4 +105,4 @@ Route::get('/admin', ['uses' => 'BackendController@view',
 ]);
 
 */
-Auth::routes(); //Route::get('/home', 'HomeController@index'); 
+//Auth::routes(); Route::get('/home', 'HomeController@index'); 

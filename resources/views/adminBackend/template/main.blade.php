@@ -63,7 +63,6 @@
               <li class="{{ $seccionActiva['inicio'] }}"><a href="{{ url('admin/inicio/1/edit') }}">Inicio</a></li>
               <li class="{{ $seccionActiva['empresa'] }}"><a href="{{ url('admin/empresa/1/edit') }}">Empresa</a></li>
               <li class="{{ $seccionActiva['servicios'] }}"><a href="{{ url('admin/servicios') }}">Servicios</a></li>
-              <li class="{{ $seccionActiva['imagenes'] }}"><a href="{{ url('admin/imagenes') }}">Imagenes</a></li>
 
               <!-- button usuario y salir -->
               <li class="dropdown">
@@ -71,10 +70,12 @@
                   <span class="caret"></span>
                   <span class="sr-only">Toggle Dropdown</span></a>
                 <ul class="dropdown-menu">
-                  <li><a href="{{ url('/logout') }}"
+                    <li><a href="{{ url('/admin/password/reset') }}">Cambiar Contrase&ntilde;a</a></li>
+
+                    <li><a href="{{ url('/admin/logout') }}"
                       onclick="event.preventDefault();
                         document.getElementById('logout-form').submit();"> Salir </a>
-                        <form id="logout-form" action="{{ url('/logout') }}" method="POST" style="display: none;">  {{ csrf_field() }} </form></li>
+                        <form id="logout-form" action="{{ url('/admin/logout') }}" method="POST" style="display: none;">  {{ csrf_field() }} </form></li>
                 </ul>
                 </div>
               </li> <!-- fin boton salir -->
@@ -83,6 +84,7 @@
         </div>
       </nav>
     </div>
+
     <!-- Begin page content -->
     <div class="container divContainer">
       @yield('content')
@@ -90,9 +92,9 @@
 
     <footer class="footer">
       <div class="container">
-        <p class="text-muted">Contacto:&nbsp;&nbsp;contacto@fgmingenieria.com.ar</p>
-        <p class="text-muted">Tel&eacute;fono:&nbsp;&nbsp;0221-155489828</p>
-        <p class="text-muted">La Plata&nbsp;&nbsp;-&nbsp;&nbsp;Buenos Aires&nbsp;&nbsp;-&nbsp;&nbsp;Argentina</p>
+        <p class="text-muted">Contacto:&nbsp;&nbsp;{{ $datosEmpresa->mail }}</p>
+        <p class="text-muted">Tel&eacute;fono:&nbsp;&nbsp;{{ $datosEmpresa->telefono }}</p>
+        <p class="text-muted">{{ $datosEmpresa->localidad }}&nbsp;&nbsp;-&nbsp;&nbsp;{{ $datosEmpresa->provincia }}&nbsp;&nbsp;-&nbsp;&nbsp;Argentina</p>
       </div>
     </footer>
     @endif
@@ -110,6 +112,7 @@
         a('.myCarousel').carousel()
       });
     </script>
+
  
   </body>
 </html>

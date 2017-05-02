@@ -8,7 +8,7 @@ class Imagen extends Model
 {
   protected $table = "Imagenes";
 
-  protected $filllable = ['nombre', 'IdServicio', 'nombreArchivo'];
+  protected $filllable = ['idServicio', 'nombre', 'nombreArchivo', 'nombreThumbnails', 'nombreArchivoThumbnails', 'pieDeFoto'];
   protected $guarded = ['id'];
 
   /*public function categoria()

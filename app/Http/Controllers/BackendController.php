@@ -20,7 +20,7 @@ class BackendController extends Controller
     }
 
     public function view(){
-        return redirect('admin/inicio/1/edit');
+       return redirect('admin/inicio/1/edit');
     }
 
 }

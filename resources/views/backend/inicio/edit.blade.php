@@ -37,7 +37,7 @@
 			             )) !!}
 			</div>
             <div class="form-group">
-            	<div class="col-lg-7">
+            	<div class="col-lg-6">
                     {!! Form::label('Imagen (2348px 1115px)') !!}
     
  					<div class="divFile">
@@ -49,8 +49,8 @@
                 </div>
             </div>
 
-			<div class="form-group col-lg-1 marginTop20">
-			    {!! Form::submit('Agregar', ['class'=>'btn btn-primary']) !!}
+			<div class="form-group col-lg-2 marginTop20">
+			    {!! Form::submit('Agregar Imagen', ['class'=>'btn btn-primary']) !!}
 			</div>
 
 	    	{{ Form::close() }}
@@ -58,27 +58,28 @@
 		</div> 
 		<!-- Fin Formulario Imagenes Carousel en Inicio -->
 
-		<!-- Imagenes para Carousel -->
+		<!-- Imagenes Carousel -->
         <div>
    			<hr>
    			<div class="contenedorImagenes">
         	@foreach($imagenes as $imagen)
 	            <div class="col-lg-4 imagenConBoton">  
 			        <img src="{{ asset('/images/carousel/'. $imagen->nombreArchivo) }}" alt="{{ $imagen->servicio->nombre }}" width="360" > <!-- VER ALT -->
-			        <div class="botonParaImagen">
+			        <div class="botonParaImagen"> <!--Eliminar Imagen-->
 			        	{{ Form::open(["route" => ["imagenesInicio.destroy", $imagen->id], "method" => "DELETE" ]) }}
 						{{ Form::hidden('id', $imagen->id) }}
 						
 						{{ Form::button('', ['class' => 'btn btn-danger glyphicon glyphicon-remove', 'type' => 'submit', 'onclick' => 'return confirm("Confirma que desea eliminar la imagen '.$imagen->nombre.'?")'] ) }}
 
-						{{ Form::close() }}  </div>
-    					<h2 class="carousel-caption"> {{ $imagen->servicio->nombre }} </h2>	
-			     </div><!-- /.col-lg-4 -->
+						{{ Form::close() }}  
+					</div>
+    				<h2 class="carousel-caption"> {{ $imagen->servicio->nombre }} </h2>	
+			    </div><!-- /.col-lg-4 -->
 
 	        @endforeach
 	        </div>
 	    </div><!-- /.row -->
-		<!-- Fin Imagenes para Carousel -->
+		<!-- Fin Imagenes Carousel -->
 
 		<!-- Texto Inicio -->
 		<div class="container marketing col-lg-12"> 
@@ -95,7 +96,7 @@
 
 		<!-- Formulario Texto en Inicio -->
 		<div id='formEditOculto'>
-			{{ Form::open(["route" => ["inicio.update", $descripcion], "method" => "PUT", "id" => "FormEdit"]) }}
+			{{ Form::open(["route" => ["inicio.update", $descripcion], "method" => "PUT"]) }}
 			<div class="form-group">   {!! Form::textarea("textoInicio", $descripcion->textoInicio, array("required", "class"=>"form-control tipografiaTextoInicio", "id" => "te")) !!} </div>  
 			<div class="form-group"> {!! Form::submit("Modificar", ["class"=>"btn btn-primary marginLeft"]) !!} </div> 
 			{{ Form::close() }} 

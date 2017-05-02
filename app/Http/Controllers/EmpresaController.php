@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Empresa;
+use App\Descripcion;
 use Validator;
 
 class EmpresaController extends Controller
@@ -76,9 +77,9 @@ class EmpresaController extends Controller
             'servicios' => "",
             'imagenes' => ""            
             );
-
-        $empresa = Empresa::find($id);
-        return view('backend.empresa.edit', ['seccionActiva' => $seccionActiva, 'empresa' => $empresa]);
+        $descripciones = Descripcion::find(1);
+        $datosEmpresa = Empresa::find($id);
+        return view('backend.empresa.edit', ['seccionActiva' => $seccionActiva, 'datosEmpresa' => $datosEmpresa, 'descripciones' => $descripciones]);
     }
 
     /**
@@ -92,7 +93,13 @@ class EmpresaController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'nombre' => 'required|min:1|max:50',
-            'mail' => 'max:50|email'
+            'mail' => 'required|max:50|email',
+            'telefono' => 'required',
+            'localidad' => 'required',
+            'provincia' => 'required',
+            'textoVision' => 'required',
+            'textoMision' => 'required',
+            'textoValores' => 'required'
         ]);
         if ($validator->fails()){
           return redirect()
@@ -102,10 +109,19 @@ class EmpresaController extends Controller
         };
 
         $empresa = Empresa::find($id);
-        $empresa->fill($request->all());
+        $empresa->nombre = $request->nombre;
+        $empresa->mail = $request->mail;
+        $empresa->telefono = $request->telefono;
+        $empresa->localidad = $request->localidad;
+        $empresa->provincia = $request->provincia;
         $empresa->save();
 
-        return redirect()->route('empresa.index');  //modificar
+        $descripciones = Descripcion::find($id);
+        $descripciones->textoVision = $request->textoVision;
+        $descripciones->textoMision = $request->textoMision;
+        $descripciones->textoValores = $request->textoValores;
+        $descripciones->save();
+        return redirect()->route('inicio.edit', ['id' => 1]);  //vuelve a Inicio
 
     }
 

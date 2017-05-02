@@ -8,7 +8,7 @@ class Servicio extends Model
 {
     protected $table = "Servicios";
 
-    protected $filllable = ['Nombre', 'nombreImagen', 'DescripcionCorta', 'Descripcion', 'ConDetalle'];
+    protected $filllable = ['Nombre', 'nombreImagen', 'nombreArchivo', 'DescripcionCorta', 'Descripcion', 'ConDetalle'];
     protected $guarded = ['id'];
 
     public function imagenes()

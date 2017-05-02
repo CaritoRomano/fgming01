@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Descripcion;
 use App\ImagenInicio;
 use App\Servicio;
+use App\Empresa;
 use Validator;
 
 class InicioController extends Controller
@@ -76,14 +77,14 @@ class InicioController extends Controller
         $seccionActiva = array(
             'inicio' => "active",
             'empresa' => "",
-            'servicios' => "",
-            'imagenes' => ""            
+            'servicios' => ""           
             );
         $descripcion = Descripcion::find(1);
         $cantImagenes = ImagenInicio::count();
         $imagenes = ImagenInicio::orderBy('id', 'DESC')->paginate(10);
         $servicios = Servicio::orderBy('nombre', 'ASC')->pluck('nombre', 'id');
-        return view('backend.inicio.edit', ['seccionActiva' => $seccionActiva, 'descripcion' => $descripcion, 'cantImagenes'=> $cantImagenes, 'imagenes' => $imagenes, 'servicios' => $servicios]);
+        $datosEmpresa = Empresa::find(1);
+        return view('backend.inicio.edit', ['seccionActiva' => $seccionActiva, 'descripcion' => $descripcion, 'cantImagenes'=> $cantImagenes, 'imagenes' => $imagenes, 'servicios' => $servicios, 'datosEmpresa' => $datosEmpresa]);
     }
 
     /**

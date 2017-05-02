@@ -130,8 +130,6 @@
             document.getElementById('nombreImagen').innerHTML = ['<p> {{ $imagen->nombre }} </p> '].join('');
             // Insertamos la imagen
             document.getElementById('imagenVista').innerHTML = ['<img class="img-rounded" alt="Imagen" width="300" height="200" src="{{ asset("images/" . $nombreServicioImagen . "/" . $imagen->nombreArchivo) }}"/>'].join('');
-
-
         }
         window.addEventListener('load', cargarImagenes, false);
     </script>
