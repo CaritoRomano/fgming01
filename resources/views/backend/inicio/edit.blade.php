@@ -64,7 +64,7 @@
    			<div class="contenedorImagenes">
         	@foreach($imagenes as $imagen)
 	            <div class="col-lg-4 imagenConBoton">  
-			        <img src="{{ asset('/images/carousel/'. $imagen->nombreArchivo) }}" alt="{{ $imagen->servicio->nombre }}" width="360" > <!-- VER ALT -->
+			        <img src="{{ asset('/images/carousel/'. $imagen->nombreArchivo) }}" alt="{{ $imagen->servicio->nombre }}" width="360" height="171"> <!-- VER ALT -->
 			        <div class="botonParaImagen"> <!--Eliminar Imagen-->
 			        	{{ Form::open(["route" => ["imagenesInicio.destroy", $imagen->id], "method" => "DELETE" ]) }}
 						{{ Form::hidden('id', $imagen->id) }}
@@ -142,7 +142,7 @@
                       //insertamos el nombre de la imagen
                      document.getElementById('nombreImagen').innerHTML = '<p>' + document.getElementById('imagen').files[0].name + '</p>';           
                       // Insertamos la imagen
-                     document.getElementById('imagenVista').innerHTML = ['<img class="img-rounded" alt="Imagen" width="300" height="200" src="', e.target.result,'" title="', escape(theFile.name), '"/>'].join('');
+                     document.getElementById('imagenVista').innerHTML = ['<img class="img-rounded" alt="Imagen" width="360" height="171" src="', e.target.result,'" title="', escape(theFile.name), '"/>'].join('');
                     };
                 })(f);
          

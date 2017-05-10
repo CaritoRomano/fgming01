@@ -88,7 +88,7 @@ class ImagenesController extends Controller
         $imagen->nombreArchivoThumbnails = $nombreArchivoThumbnails;
         $imagen->save();
   
-        return redirect()->route('imagenes.index');  //modificar
+        return redirect()->route('imagenes.show', ['id' => $request->idServicio]);  
     }
 
     /**
@@ -105,8 +105,11 @@ class ImagenesController extends Controller
             'servicios' => "active"
         );
         $servicio = Servicio::find($id);
+        
+        $tieneImagenes = (count($servicio->imagenes)>0);
         $datosEmpresa = Empresa::find(1);
-        return view('backend.imagenes.show', ['seccionActiva' => $seccionActiva, 'servicio' => $servicio, 'datosEmpresa' => $datosEmpresa]);
+     
+        return view('backend.imagenes.show', ['seccionActiva' => $seccionActiva, 'servicio' => $servicio, 'datosEmpresa' => $datosEmpresa, 'tieneImagenes' => $tieneImagenes]);
     }
 
     /**

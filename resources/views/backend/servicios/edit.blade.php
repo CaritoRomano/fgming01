@@ -61,7 +61,7 @@
 				    @if($servicio->conDetalle == 1)
 				    	{!! Form::checkbox('conDetalle', 1, true, ['class' => 'field']) !!}
 				    @else
-				    	{!! Form::checkbox('conDetalle', 0, false, ['class' => 'field']) !!}
+				    	{!! Form::checkbox('conDetalle', 1, false, ['class' => 'field']) !!}
 				    @endif
 				</div>
 

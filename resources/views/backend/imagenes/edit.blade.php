@@ -8,8 +8,8 @@
 
 @section('content')
     <div class="page-header">
-    	<h3 class="featurette-heading">Imagen. <span class="text-muted"> Crear </span></h3>
- 	</div>
+    	<h3 class="featurette-heading">Imagen. <span class="text-muted"> Editar </span></h3>
+ 	  </div>
 
     <div class="divFormContacto">
     	@if(count($errors)>0)
@@ -21,55 +21,63 @@
 	        	</ul>
 	    	</div>
 		@endif
-
-	    {{ Form::open(['route' => ['imagenes.update', $imagen], 'method' => 'PUT', 'files' => true]) }}
-
-			<div class="form-group">
-			    {!! Form::label('Servicio') !!}
-			    {!! Form::select('id', $servicios,  
-			        array('required', 
-			              'class'=>'form-control', 
-			              'value'=> $imagen->idServicio )) !!}
-			</div>
-            <div class="form-group">
-                <div class="table-responsive">
-                <table class ="table table-striped">
-                    <thead>
-                    <tr>
-                        <th>{!! Form::label('Thumbnails (250px 250px)') !!}</th>
-                        <th>{!! Form::label('Imagen (2348px 1115px)') !!}</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>  <div class="divFile">
-                                  <p class="textoBotonSubirImg"> Cargar Thumbnails </p>    
-                                  {!! Form::file('thumbnails', ['id' =>'thumbnails', 'class' => 'botonSubirImg']) !!} </div> 
-                                  <output id="imagenThumbnails" align="center"></output> 
-                                  <output id="nombreImagenThumbnails"></output> 
-                            </td>                               
-                            <td> <div class="divFile">
-                                 <p class="textoBotonSubirImg"> Cargar Imagen </p>
-                                 {!! Form::file('imagen', ['id' =>'imagen', 'class' => 'botonSubirImg']) !!}   </div> 
-                                 <output id="imagenVista"></output>
-                                 <output id="nombreImagen"></output>  
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                </div>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            {{ Form::open(['route' => ['imagenes.update', $imagen], 'method' => 'PUT', 'files' => true, 'id' => 'formEditarImagen']) }}
+            <div class="form-group col-lg-6"> 
+                {!! Form::label('Thumbnails (250px 250px)') !!}
+                <div class="divFile">
+                    <p class="textoBotonSubirImg"> Cargar Thumbnails </p>    
+                    {!! Form::file('thumbnails', ['id' =>'thumbnailsEdit', 'class' => 'botonSubirImg']) !!}
+                </div> 
+                <output id="imagenEditThumbnails" align="center"></output> 
+                <output id="nombreEditThumbnails"></output> 
             </div>
-
-			<div class="form-group">
-			    {!! Form::submit('Agregar', ['class'=>'btn btn-primary']) !!}
-			</div>
-
-	    {{ Form::close() }} 
+      
+            <div class="form-group col-lg-6">
+                {!! Form::label('Imagen (2348px 1115px)') !!}
+                <div class="divFile">
+                    <p class="textoBotonSubirImg"> Cargar Imagen </p>
+                    {!! Form::file('imagen', ['id' =>'imagenEdit', 'class' => 'botonSubirImg']) !!}   
+                </div> 
+                <output id="imagenEditVista"></output>
+                <output id="nombreEditImagen"></output> 
+            </div>
+            
+            <div class="form-group col-lg-10">
+                {!! Form::label('Pie de Foto') !!}
+                {!! Form::text('pieDeFoto', $imagen->pieDeFoto, 
+                array('class'=>'form-control', 'id'=>'pieDeFoto',
+                      'placeholder'=>'Pie de foto')) !!}
+            </div> 
+            <div class="form-group col-lg-2">
+                <br>
+                {!! Form::submit('Modificar Imagen', ['class'=>'btn btn-primary']) !!}
+            </div>
+            {{ Form::close() }}
+        </div>
+    </div> 
 
 	</div>
 
 	<script type="text/javascript">
-        function paraThumbnails(evt) {
+
+/* EDITAR IMAGEN */
+        /* cuando editamos, carga la que ya esta en la bd */
+        function cargarImagenes(evt) { 
+            //nombre del Thumbnails
+            document.getElementById('nombreEditThumbnails').innerHTML = ['<p> {{ $imagen->nombreThumbnails }} </p> '].join('');
+            //insertamos Thumbnails
+            document.getElementById('imagenEditThumbnails').innerHTML = ['<img class="img-rounded" alt="Imagen" width="100" height="100" src="{{ asset("images/thumbnails/" . $nombreServicioImagen . "/" . $imagen->nombreArchivoThumbnails) }}"/>'].join('');
+            //nombre de la imagen
+            document.getElementById('nombreEditImagen').innerHTML = ['<p> {{ $imagen->nombre }} </p> '].join('');
+            // Insertamos la imagen
+            document.getElementById('imagenEditVista').innerHTML = ['<img class="img-rounded" alt="Imagen" width="300" height="145" src="{{ asset("images/" . $nombreServicioImagen . "/" . $imagen->nombreArchivo) }}"/>'].join('');
+        }
+        window.addEventListener('load', cargarImagenes, false);
+
+        /*cargo Thumbnails cuando seleccionan uno*/
+        function paraThumbnailsEdit(evt) {
             var files = evt.target.files; // FileList object
              
             // Obtenemos la imagen del campo "file".
@@ -83,19 +91,20 @@
          
                 reader.onload = (function(theFile) {
                     return function(e) {
-                      //insertamos el nombre del thumbnails 
-                      document.getElementById('nombreImagenThumbnails').innerHTML = '<p>' + document.getElementById('thumbnails').files[0].name + '</p>';     
+                     //insertamos el nombre del thumbnails 
+                     document.getElementById('nombreEditThumbnails').innerHTML = '<p>' + document.getElementById('thumbnailsEdit').files[0].name + '</p>';   
                       // Insertamos la imagen
-                     document.getElementById('imagenThumbnails').innerHTML = ['<img class="img-rounded" alt="Imagen" width="100" height="100" src="', e.target.result,'" title="', escape(theFile.name), '"/>'].join('');
+                     document.getElementById('imagenEditThumbnails').innerHTML = ['<img class="img-rounded" alt="Imagen" width="100" height="100" src="', e.target.result,'" title="', escape(theFile.name), '"/>'].join('');
                     };
                 })(f);
          
                 reader.readAsDataURL(f);
-              }
-          }
-        document.getElementById('thumbnails').addEventListener('change', paraThumbnails, false);
+            }
+        }
+        document.getElementById('thumbnailsEdit').addEventListener('change', paraThumbnailsEdit, false);
 
-        function paraImagen(evt) {
+        /*cargo Imagen cuando seleccionan una*/
+        function paraImagenEdit(evt) {
             var files = evt.target.files; // FileList object
              
             // Obtenemos la imagen del campo "file".
@@ -110,29 +119,16 @@
                 reader.onload = (function(theFile) {
                     return function(e) {
                       //insertamos el nombre de la imagen
-                     document.getElementById('nombreImagen').innerHTML = '<p>' + document.getElementById('imagen').files[0].name + '</p>';       
+                     document.getElementById('nombreEditImagen').innerHTML = '<p>' + document.getElementById('imagenEdit').files[0].name + '</p>';           
                       // Insertamos la imagen
-                     document.getElementById('imagenVista').innerHTML = ['<img class="img-rounded" alt="Imagen" width="300" height="200" src="', e.target.result,'" title="', escape(theFile.name), '"/>'].join('');
+                     document.getElementById('imagenEditVista').innerHTML = ['<img class="img-rounded" alt="Imagen" width="300" height="145" src="', e.target.result,'" title="', escape(theFile.name), '"/>'].join('');
                     };
                 })(f);
          
                 reader.readAsDataURL(f);
             }
         }
-        document.getElementById('imagen').addEventListener('change', paraImagen, false);
-
-        function cargarImagenes(evt) { //cuando editamos, carga la que ya esta en la bd
-            //nombre del Thumbnails
-            document.getElementById('nombreImagenThumbnails').innerHTML = ['<p> {{ $imagen->nombreThumbnails }} </p> '].join('');
-        	//insertamos Thumbnails
-        	document.getElementById('imagenThumbnails').innerHTML = ['<img class="img-rounded" alt="Imagen" width="100" height="100" src="{{ asset("images/thumbnails/" . $nombreServicioImagen . "/" . $imagen->nombreArchivoThumbnails) }}"/>'].join('');
-            //nombre de la imagen
-            document.getElementById('nombreImagen').innerHTML = ['<p> {{ $imagen->nombre }} </p> '].join('');
-            // Insertamos la imagen
-            document.getElementById('imagenVista').innerHTML = ['<img class="img-rounded" alt="Imagen" width="300" height="200" src="{{ asset("images/" . $nombreServicioImagen . "/" . $imagen->nombreArchivo) }}"/>'].join('');
-        }
-        window.addEventListener('load', cargarImagenes, false);
+        document.getElementById('imagenEdit').addEventListener('change', paraImagenEdit, false);
+        /* FIN EDITAR IMAGEN */
     </script>
-
-
 @endsection

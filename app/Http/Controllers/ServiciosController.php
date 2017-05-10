@@ -34,9 +34,21 @@ class ServiciosController extends Controller
             'inicio' => "",
             'empresa' => "",
             'servicios' => "active"
-            );
+        );
+
         $servicios = Servicio::orderBy('id', 'DESC')->paginate(10);
         $datosEmpresa = Empresa::find(1);
+        /*agrego descripcion larga truncada para mostrar*/
+        foreach ($servicios as $servicio){
+            if ($servicio->conDetalle){
+                $texto=substr($servicio->descripcion, 0, 300);
+                $index=strrpos($texto, " ");
+                $texto=substr($texto, 0,$index); 
+                $texto.="...";
+                $servicio->descripMostrar = $texto;
+            }
+        }
+                
         return view('backend.servicios.index', ['seccionActiva' => $seccionActiva, 'servicios' => $servicios, 'datosEmpresa' => $datosEmpresa]);
     }
 
@@ -61,7 +73,7 @@ class ServiciosController extends Controller
         $validator = Validator::make($request->all(), [
             'imagen' => 'required|image',
             'nombre' => 'required',
-            'descripcionCorta' => 'required|max:250'
+            'descripcionCorta' => 'required|max:550'
         ]);
         
         if ($validator->fails()){
@@ -133,9 +145,8 @@ class ServiciosController extends Controller
     public function update(Request $request, $id)
     {  
         $validator = Validator::make($request->all(), [
-            'imagen' => 'required|image',
             'nombre' => 'required',
-            'descripcionCorta' => 'required|max:250'
+            'descripcionCorta' => 'required|max:550'
         ]);
         
         if ($validator->fails()){
@@ -145,24 +156,31 @@ class ServiciosController extends Controller
                 ->withInput();
         };
         
-        $file = $request->file('imagen');
-            
+        $datosServicioGuardado = Servicio::find($id);
         $servicio = Servicio::find($id);
+
+        /*si cambio la imagen, actualizo los datos*/
+        if($request->file('imagen') <> null){
+            $file = $request->file('imagen');
+            $servicio->nombreImagen = $file->getClientOriginalName();
+            $servicio->nombreArchivo = '';
+        }
         $servicio->nombre = $request->nombre;
-        $servicio->nombreImagen = $file->getClientOriginalName();
-        $servicio->nombreArchivo = '';
         $servicio->descripcion = $request->descripcion;
         $servicio->descripcionCorta = $request->descripcionCorta;
         ($request->conDetalle == 1) ? $request->conDetalle = 1 : $request->conDetalle = 0;
         $servicio->conDetalle = $request->conDetalle;
         $servicio->save();
 
-        $path = public_path() . '/images/servicios';
-        $nombreArchivo = $servicio->id .'imagenVista_' . $request->nombre . '.' . $file->getClientOriginalExtension();
-        $file->move($path, $nombreArchivo);
+        /*si cambio la imagen, guardo el archivo de la imagen*/
+            if($request->file('imagen') <> null){
+            $path = public_path() . '/images/servicios';
+            $nombreArchivo = $servicio->id .'imagenVista_' . $request->nombre . '.' . $file->getClientOriginalExtension();
+            $file->move($path, $nombreArchivo);
 
-        $servicio->nombreArchivo = $nombreArchivo;
-        $servicio->save();
+            $servicio->nombreArchivo = $nombreArchivo;
+            $servicio->save(); 
+        }
 
         return redirect()->route('servicios.index');  //modificar
     }

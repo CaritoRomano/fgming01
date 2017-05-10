@@ -49,9 +49,9 @@
 			</div>
 			
 			<div class="form-group col-lg-4">
-				{!! Form::label('Imagen del Servicio') !!}
+				{!! Form::label('Imagen del Servicio (360px 240px)') !!}
 				<div class="divFile">
-                    <p class="textoBotonSubirImg"> Seleccionar Imagen </p>
+                    <p class="textoBotonSubirImg"> Seleccionar Imagen</p>
 					{!! Form::file('imagen', ['id' => 'imagen', 'class' => 'botonSubirImg']) !!}
 				</div> 
                 <output id="imagenVista"></output>
@@ -97,14 +97,20 @@
 			{{ Form::close() }}
 			</div>
 			<div class="col-lg-3">
+				@if ($servicio->conDetalle)
 	     		<a href="{{ route('imagenes.show', ['id' => $servicio->id]) }}" class="btn btn-primary MBServicio">Im&aacute;genes</a>
+	     		@endif
         	</div>
-        	<img src="{{ asset('/images/servicios/'. $servicio->nombreArchivo)  }}" alt="{{ $servicio->nombreImagen }}" width="360" > <!-- width="140" height="140"> -->
+        	<img src="{{ asset('/images/servicios/'. $servicio->nombreArchivo)  }}" alt="{{ $servicio->nombreImagen }}" width="360" height="240"> <!-- width="140" height="140"> -->
           	<h2>{{ $servicio->nombre }}</h2>
-          	<p class="parrafoServicios"> {{ $servicio->descripcionCorta }} </p>
-          	@if ($servicio->conDetalle)
-          		<p class="parrafoServicios"> {{ $servicio->descripcion }} </p>
-          	@endif
+          	<div class="parrafoServicios">
+          		<p> {{ $servicio->descripcionCorta }} </p> 
+          		@if ($servicio->conDetalle)
+          		    <hr>
+          			<h4>Descripci&oacute;n completa</h4>
+          			<p> {{ $servicio->descripMostrar }} </p>
+          		@endif
+          	</div>
         </div><!-- /.col-lg-4 -->
         @endforeach
     </div><!-- /.row -->

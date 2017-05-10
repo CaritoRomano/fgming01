@@ -22,6 +22,7 @@
         ]); ?>
     </script>
 </head>
+
 <body class="imagenFondoLogin">
     <!-- <nav class="navbar navbar-default navbar-static-top">
         <div class="container">
